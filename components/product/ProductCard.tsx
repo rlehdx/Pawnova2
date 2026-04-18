@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { ShoppingCart, Star } from 'lucide-react'
+import { ShoppingCart, Heart } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
 import { useCart } from '@/hooks/useCart'
 import type { Product } from '@/types/database'
@@ -29,11 +29,23 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
     addToCart(variantId, 1)
   }
 
+  // Category label from first collection
+  const categoryLabel = product.collections[0]?.title ?? null
+
   return (
     <Link
       href={`/shop/${product.handle}`}
-      className="group flex flex-col rounded-[var(--radius-card)] overflow-hidden border border-[var(--color-divider)] hover:border-[var(--color-accent)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/40 transition-all duration-200"
-      style={{ backgroundColor: 'var(--color-surface)' }}
+      className="group flex flex-col rounded-[var(--radius-card)] overflow-hidden border border-[var(--color-divider)] hover:border-[var(--color-accent)] hover:-translate-y-1 transition-all duration-200"
+      style={{
+        backgroundColor: 'var(--color-surface)',
+        boxShadow: 'var(--shadow-card)',
+      }}
+      onMouseEnter={(e) =>
+        ((e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-card-hover)')
+      }
+      onMouseLeave={(e) =>
+        ((e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-card)')
+      }
     >
       {/* Image */}
       <div
@@ -58,43 +70,50 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           </div>
         )}
 
+        {/* Sale badge */}
         {hasDiscount && (
           <span
-            className="absolute top-2.5 left-2.5 inline-flex items-center rounded-full px-2 py-0.5 text-xs font-bold text-white"
+            className="absolute top-2.5 left-2.5 inline-flex items-center rounded px-2 py-0.5 text-xs font-black text-white"
             style={{ backgroundColor: 'var(--color-badge-sale)' }}
           >
             -{discountPct}%
           </span>
         )}
+
+        {/* Wishlist button — visible on hover */}
+        <button
+          onClick={(e) => { e.preventDefault(); e.stopPropagation() }}
+          className="absolute top-2.5 right-2.5 flex h-7 w-7 items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+          style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+          aria-label="Save to wishlist"
+        >
+          <Heart className="h-3.5 w-3.5" style={{ color: 'var(--color-text-muted)' }} />
+        </button>
       </div>
 
       {/* Info */}
       <div className="flex flex-col gap-2 p-4 flex-1">
-        {/* Stars — display placeholder (no rating in DB) */}
-        <div className="flex items-center gap-0.5">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              className="h-3 w-3"
-              style={{ fill: 'var(--color-accent)', color: 'var(--color-accent)' }}
-            />
-          ))}
-          <span className="ml-1 text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            (4.9)
-          </span>
-        </div>
+        {/* Category label */}
+        {categoryLabel && (
+          <p
+            className="text-[10px] font-semibold uppercase tracking-widest"
+            style={{ color: 'var(--color-text-muted)' }}
+          >
+            {categoryLabel}
+          </p>
+        )}
 
         {/* Title */}
         <p
-          className="text-sm font-semibold leading-snug line-clamp-2 flex-1"
+          className="text-sm font-bold leading-snug line-clamp-2 flex-1"
           style={{ color: 'var(--color-text)' }}
         >
           {product.title}
         </p>
 
-        {/* Price */}
+        {/* Price — current price always --color-text (white), original struck through */}
         <div className="flex items-baseline gap-2">
-          <span className="text-base font-bold" style={{ color: 'var(--color-text)' }}>
+          <span className="text-base font-black" style={{ color: 'var(--color-text)' }}>
             {formatPrice(product.price)}
           </span>
           {hasDiscount && (
@@ -104,14 +123,15 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           )}
         </div>
 
-        {/* CTA — always visible */}
+        {/* CTA — pill button, always visible */}
         <button
           onClick={handleAddToCart}
           disabled={isLoading}
-          className="mt-1 flex w-full items-center justify-center gap-2 rounded-[var(--radius-card)] py-2.5 text-sm font-bold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
+          className="mt-1 flex w-full items-center justify-center gap-2 rounded-full py-2.5 text-sm font-black tracking-wide transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
           style={{
             backgroundColor: 'var(--color-accent)',
             color: 'var(--color-accent-text)',
+            boxShadow: 'var(--shadow-btn)',
           }}
           onMouseEnter={(e) =>
             (e.currentTarget.style.backgroundColor = 'var(--color-accent-hover)')
