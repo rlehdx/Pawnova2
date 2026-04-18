@@ -33,43 +33,45 @@ export function NewsletterForm() {
 
   if (status === 'success') {
     return (
-      <p className="text-sm font-medium py-3" style={{ color: 'var(--color-trust)' }}>
+      <p className="text-sm font-medium py-3" style={{ color: 'var(--color-accent)' }}>
         {message}
       </p>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 w-full max-w-md mx-auto">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="your@email.com"
-        required
-        className="w-full rounded-full border px-5 py-3 text-sm outline-none transition-colors focus:border-[var(--color-accent)]"
-        style={{
-          backgroundColor: 'var(--color-surface-2)',
-          borderColor: 'var(--color-divider)',
-          color: 'var(--color-text)',
-        }}
-      />
-      <button
-        type="submit"
-        disabled={status === 'loading'}
-        className="rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-        style={{
-          backgroundColor: 'var(--color-accent)',
-          color: 'var(--color-accent-text)',
-        }}
-      >
-        {status === 'loading' ? 'Loading...' : 'Get 15% Off'}
-      </button>
+    <div className="flex flex-col gap-2 w-full max-w-md mx-auto">
+      <form onSubmit={handleSubmit} className="flex gap-2 w-full">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          required
+          className="w-full rounded-full border px-5 py-3 text-sm outline-none transition-colors focus:border-[var(--color-accent)]"
+          style={{
+            backgroundColor: 'var(--color-surface-2)',
+            borderColor: 'var(--color-divider)',
+            color: 'var(--color-text)',
+          }}
+        />
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          className="rounded-full px-6 py-3 text-sm font-bold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
+          style={{
+            backgroundColor: 'var(--color-accent)',
+            color: 'var(--color-accent-text)',
+          }}
+        >
+          {status === 'loading' ? 'Loading...' : 'Get 15% Off'}
+        </button>
+      </form>
       {status === 'error' && (
-        <p className="text-xs mt-2 w-full text-left" style={{ color: '#e53e3e' }}>
+        <p className="text-xs text-left" style={{ color: 'var(--color-badge-sale)' }}>
           {message}
         </p>
       )}
-    </form>
+    </div>
   )
 }
