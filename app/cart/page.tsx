@@ -89,14 +89,14 @@ export default function CartPage() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleSignIn}
-                  className="text-xs px-3 py-1.5 rounded-[var(--radius-btn)] font-medium text-white whitespace-nowrap"
+                  className="text-xs px-5 py-2.5 min-h-[44px] rounded-[var(--radius-btn)] font-medium text-white whitespace-nowrap"
                   style={{ backgroundColor: 'var(--color-accent)' }}
                 >
                   Sign in
                 </button>
                 <button
                   onClick={() => setBannerDismissed(true)}
-                  className="p-1 rounded hover:bg-[var(--color-bg)] transition-colors"
+                  className="p-2 rounded hover:bg-[var(--color-bg)] transition-colors"
                   style={{ color: 'var(--color-text-muted)' }}
                   aria-label="Dismiss"
                 >
