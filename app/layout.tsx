@@ -51,18 +51,12 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const cookieStore = await cookies()
-  const theme = (cookieStore.get('theme')?.value ?? 'light') as 'light' | 'dark'
+  const theme = (cookieStore.get('theme')?.value ?? 'dark') as 'light' | 'dark'
 
   return (
     <html lang="en" data-theme={theme} className={dmSans.variable}>
       <head>
         <ThemeScript />
-        {/* Zodiak font via Fontshare CDN */}
-        <link rel="preconnect" href="https://api.fontshare.com" />
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=zodiak@400,700&display=swap"
-          rel="stylesheet"
-        />
       </head>
       <body>
         <AnnouncementBar />
