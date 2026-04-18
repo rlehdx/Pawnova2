@@ -13,7 +13,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, priority = false }: ProductCardProps) {
-  const { addItem, isLoading } = useCart()
+  const { addToCart, isLoading } = useCart()
 
   const hasDiscount =
     product.compareAtPrice != null && product.compareAtPrice > product.price
@@ -24,7 +24,9 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    addItem(product.id, 1)
+    const variantId = product.variants[0]?.id
+    if (!variantId) return
+    addToCart(variantId, 1)
   }
 
   return (
