@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ShoppingCart, Heart } from 'lucide-react'
+import { useState } from 'react'
 import { formatPrice } from '@/lib/utils'
 import { useCart } from '@/hooks/useCart'
 import type { Product } from '@/types/database'
@@ -14,6 +15,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product, priority = false }: ProductCardProps) {
   const { addToCart, isLoading } = useCart()
+  const [wishlisted, setWishlisted] = useState(false)
 
   const hasDiscount =
     product.compareAtPrice != null && product.compareAtPrice > product.price
@@ -29,7 +31,12 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
     addToCart(variantId, 1)
   }
 
-  // Category label from first collection
+  const handleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setWishlisted((prev) => !prev)
+  }
+
   const categoryLabel = product.collections[0]?.title ?? null
 
   return (
@@ -80,14 +87,20 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           </span>
         )}
 
-        {/* Wishlist button — visible on hover */}
+        {/* Wishlist button — always visible on touch, hover-only on desktop */}
         <button
-          onClick={(e) => { e.preventDefault(); e.stopPropagation() }}
-          className="absolute top-2.5 right-2.5 flex h-7 w-7 items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+          onClick={handleWishlist}
+          className="absolute top-2 right-2 flex h-10 w-10 items-center justify-center rounded-full opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100 transition-opacity duration-200"
           style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
-          aria-label="Save to wishlist"
+          aria-label={wishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
         >
-          <Heart className="h-3.5 w-3.5" style={{ color: 'var(--color-text-muted)' }} />
+          <Heart
+            className="h-4 w-4 transition-colors duration-200"
+            style={{
+              color: wishlisted ? 'var(--color-accent)' : 'var(--color-text-muted)',
+              fill: wishlisted ? 'var(--color-accent)' : 'none',
+            }}
+          />
         </button>
       </div>
 
@@ -111,7 +124,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           {product.title}
         </p>
 
-        {/* Price — current price always --color-text (white), original struck through */}
+        {/* Price */}
         <div className="flex items-baseline gap-2">
           <span className="text-base font-black" style={{ color: 'var(--color-text)' }}>
             {formatPrice(product.price)}
@@ -123,7 +136,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           )}
         </div>
 
-        {/* CTA — pill button, always visible */}
+        {/* CTA — pill button */}
         <button
           onClick={handleAddToCart}
           disabled={isLoading}
