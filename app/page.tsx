@@ -205,7 +205,7 @@ export default async function HomePage() {
 
       {/* ── Testimonials ─────────────────────────────────────────── */}
       <section className="mx-auto max-w-7xl px-4 md:px-8 py-14">
-        <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--color-text)' }}>
+        <h2 className="text-2xl md:text-3xl font-bold mb-8" style={{ color: 'var(--color-text)' }}>
           What Pet Parents Are Saying
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -305,7 +305,7 @@ function CategoryRow({
       </div>
       <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
         {products.map((product) => (
-          <div key={product.id} className="w-48 flex-shrink-0">
+          <div key={product.id} className="w-52 flex-shrink-0">
             <ProductCard product={product} />
           </div>
         ))}
