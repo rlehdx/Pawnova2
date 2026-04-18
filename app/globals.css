@@ -18,6 +18,14 @@
 
   --radius-btn: 50px;
   --radius-card: 14px;
+
+  /* Shadow */
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-btn: 0 2px 8px rgba(255, 193, 7, 0.25);
+
+  /* Transition */
+  --transition-base: all 0.2s ease;
 }
 
 :root {
@@ -31,6 +39,10 @@
   --color-accent-text: #000000;
   --color-divider: #2a2a2a;
   --color-badge-sale: #ef4444;
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-btn: 0 2px 8px rgba(255, 193, 7, 0.25);
+  --transition-base: all 0.2s ease;
 }
 
 [data-theme="light"] {
@@ -44,6 +56,10 @@
   --color-accent-hover: #FFB300;
   --color-accent-text: #000000;
   --color-badge-sale: #ef4444;
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --shadow-btn: 0 2px 8px rgba(255, 193, 7, 0.4);
+  --transition-base: all 0.2s ease;
 }
 
 [data-theme="dark"] {
