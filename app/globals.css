@@ -1,0 +1,111 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-bg: #0f0f0f;
+  --color-surface: #1c1c1c;
+  --color-surface-2: #2a2a2a;
+  --color-text: #f5f5f5;
+  --color-text-muted: #9a9a9a;
+  --color-accent: #FFC107;
+  --color-accent-hover: #FFB300;
+  --color-accent-text: #000000;
+  --color-divider: #2a2a2a;
+  --color-badge-sale: #ef4444;
+
+  --font-display: 'DM Sans', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  --radius-btn: 50px;
+  --radius-card: 14px;
+}
+
+:root {
+  --color-bg: #0f0f0f;
+  --color-surface: #1c1c1c;
+  --color-surface-2: #2a2a2a;
+  --color-text: #f5f5f5;
+  --color-text-muted: #9a9a9a;
+  --color-accent: #FFC107;
+  --color-accent-hover: #FFB300;
+  --color-accent-text: #000000;
+  --color-divider: #2a2a2a;
+  --color-badge-sale: #ef4444;
+}
+
+[data-theme="light"] {
+  --color-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0f0f0;
+  --color-text: #0f0f0f;
+  --color-text-muted: #6b6b6b;
+  --color-divider: #e5e5e5;
+  --color-accent: #FFC107;
+  --color-accent-hover: #FFB300;
+  --color-accent-text: #000000;
+  --color-badge-sale: #ef4444;
+}
+
+[data-theme="dark"] {
+  --color-bg: #0f0f0f;
+  --color-surface: #1c1c1c;
+  --color-surface-2: #2a2a2a;
+  --color-text: #f5f5f5;
+  --color-text-muted: #9a9a9a;
+  --color-accent: #FFC107;
+  --color-accent-hover: #FFB300;
+  --color-accent-text: #000000;
+  --color-divider: #2a2a2a;
+  --color-badge-sale: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scroll fade-up reveal */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Marquee trust bar */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Hide scrollbar (category rows) */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
