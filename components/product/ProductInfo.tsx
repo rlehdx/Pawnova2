@@ -96,7 +96,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Title */}
       <h1
-        className="text-2xl md:text-3xl font-bold leading-tight"
+        className="text-2xl md:text-3xl font-black leading-tight"
         style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text)' }}
       >
         {product.title}
