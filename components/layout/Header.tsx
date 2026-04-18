@@ -18,7 +18,7 @@ const NAV_LINKS = [
 
 function PawNovLogo() {
   return (
-    <Link href="/" className="flex items-center gap-2 font-bold text-xl" style={{ fontFamily: 'var(--font-display)' }}>
+    <Link href="/" className="flex items-center gap-2 font-black tracking-wider text-xl" style={{ fontFamily: 'var(--font-display)' }}>
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <ellipse cx="9" cy="8" rx="3.5" ry="4.5" fill="var(--color-accent)" />
         <ellipse cx="23" cy="8" rx="3.5" ry="4.5" fill="var(--color-accent)" />
