@@ -96,7 +96,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Title */}
       <h1
-        className="text-3xl font-bold leading-tight"
+        className="text-2xl md:text-3xl font-bold leading-tight"
         style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text)' }}
       >
         {product.title}
@@ -106,7 +106,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       <div className="flex items-center gap-3">
         <span
           className="text-2xl font-bold"
-          style={{ color: isOnSale ? 'var(--color-accent)' : 'var(--color-text)' }}
+          style={{ color: 'var(--color-text)' }}
         >
           {formatPrice(selectedVariant.price)}
         </span>
@@ -158,7 +158,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                     key={value}
                     onClick={() => matchingVariant && setSelectedVariant(matchingVariant)}
                     disabled={isUnavailable}
-                    className={`px-3 py-1.5 text-sm rounded-[var(--radius-btn)] border transition-colors ${
+                    className={`px-4 py-2.5 min-h-[44px] text-sm rounded-[var(--radius-btn)] border transition-colors ${
                       isSelected
                         ? 'border-[var(--color-accent)] bg-[var(--color-accent)] text-white'
                         : isUnavailable
