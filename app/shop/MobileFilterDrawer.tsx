@@ -12,8 +12,8 @@ export function MobileFilterDrawer() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="flex md:hidden items-center gap-1.5 h-9 rounded-[var(--radius-btn)] border border-[var(--color-divider)] px-3 text-sm"
-        style={{ color: 'var(--color-text)' }}
+        className="flex md:hidden items-center gap-2 rounded-full border px-5 py-3 text-sm font-semibold min-h-[44px] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+        style={{ borderColor: 'var(--color-divider)', color: 'var(--color-text-muted)' }}
       >
         <SlidersHorizontal className="h-4 w-4" />
         Filters
